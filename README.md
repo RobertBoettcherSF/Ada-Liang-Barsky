@@ -4,15 +4,15 @@ Educational Ada 2023 implementation of the **Liang–Barsky** 2-D line clipping
 algorithm. A line segment is clipped against an **axis-aligned rectangular**
 window using the parametric form
 
-\[
+$$
 x = x_0 + t\,\Delta x,\quad y = y_0 + t\,\Delta y
-\]
+$$
 
-and the four inequalities \(t\,p_i \le q_i\) for the left, right, bottom, and
-top edges. Entering boundaries (\(p_i < 0\)) and leaving boundaries
-(\(p_i > 0\)) yield \(t_{\mathrm{enter}} = \max(0,\ldots)\) and
-\(t_{\mathrm{leave}} = \min(1,\ldots)\). Edges with \(p_i = 0\) are parallel;
-if the corresponding \(q_i < 0\), the segment is rejected. The algorithm is
+and the four inequalities $t\,p_i \le q_i$ for the left, right, bottom, and
+top edges. Entering boundaries ($p_i < 0$) and leaving boundaries
+($p_i > 0$) yield $t_{\mathrm{enter}} = \max(0,\ldots)$ and
+$t_{\mathrm{leave}} = \min(1,\ldots)$. Edges with $p_i = 0$ are parallel;
+if the corresponding $q_i < 0$, the segment is rejected. The algorithm is
 significantly more efficient than **Cohen–Sutherland** by doing as much testing
 as possible before computing intersections.
 
@@ -37,9 +37,9 @@ Language: **Ada 2023** (ISO/IEC 8652:2023), compiled with GNAT (`-gnat2022`).
 | Variant | Subprogram | Role |
 | --- | --- | --- |
 | Window | `Make_Window`, `Is_Valid_Window` | Axis-aligned clip rectangle |
-| PQ | `Compute_PQ` | \(p_{1..4}\), \(q_{1..4}\) for left/right/bottom/top |
-| Parameters | `Clip_Parameters` | \(t_{\mathrm{enter}}\), \(t_{\mathrm{leave}}\) or reject |
-| Point | `Point_At_Parameter` | \((x_0,y_0) + t(\Delta x,\Delta y)\) |
+| PQ | `Compute_PQ` | $p_{1..4}$, $q_{1..4}$ for left/right/bottom/top |
+| Parameters | `Clip_Parameters` | $t_{\mathrm{enter}}$, $t_{\mathrm{leave}}$ or reject |
+| Point | `Point_At_Parameter` | $(x_0,y_0) + t(\Delta x,\Delta y)$ |
 | Main clip | `Liang_Barsky_Clip` | Accept/Reject + clipped segment |
 | Params clip | `Liang_Barsky_Clip_Params` | Clip + retained `t0`/`t1` |
 | Reference | `Cohen_Sutherland_Clip` | In-package CS clip for agreement tests |
@@ -70,9 +70,9 @@ There is no interactive `main.adb`; `tests.adb` is the project main.
 - Vector helpers, windows, segments, point-in-window
 - `Compute_PQ` left/right/bottom/top values
 - `Clip_Parameters` fully inside / outside / enter-leave
-- `Point_At_Parameter` at \(t \in \{0, 0.5, 1\}\)
+- `Point_At_Parameter` at $t \in \{0, 0.5, 1\}$
 - `Liang_Barsky_Clip` fixtures (inside, outside, edge crossings)
-- `Liang_Barsky_Clip_Params` retained \(t_0,t_1\)
+- `Liang_Barsky_Clip_Params` retained $t_0,t_1$
 - Parallel outside, horizontal / vertical / diagonal
 - Degenerate point segments
 - `Cohen_Sutherland_Clip` reference + LB↔CS agreement lattice
